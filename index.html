@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earthquake Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌍 Earthquake Predictor</h1>
+            <p class="subtitle">Enter the input features to predict earthquake magnitude</p>
+        </div>
+
+        <form id="predictionForm" class="form-container">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="latitude">Latitude</label>
+                    <input type="number" id="latitude" name="latitude" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="longitude">Longitude</label>
+                    <input type="number" id="longitude" name="longitude" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="depth">Depth (km)</label>
+                    <input type="number" id="depth" name="depth" step="0.1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mag">Magnitude</label>
+                    <input type="number" id="mag" name="mag" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nst">NST (Number of Stations)</label>
+                    <input type="number" id="nst" name="nst" step="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gap">Gap (degrees)</label>
+                    <input type="number" id="gap" name="gap" step="0.1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dmin">Dmin (degrees)</label>
+                    <input type="number" id="dmin" name="dmin" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="rms">RMS (seconds)</label>
+                    <input type="number" id="rms" name="rms" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="horizontalError">Horizontal Error (km)</label>
+                    <input type="number" id="horizontalError" name="horizontalError" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="depthError">Depth Error (km)</label>
+                    <input type="number" id="depthError" name="depthError" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="magError">Magnitude Error</label>
+                    <input type="number" id="magError" name="magError" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn btn-predict">Predict</button>
+                <button type="reset" class="btn btn-clear">Clear</button>
+            </div>
+        </form>
+
+        <div id="resultsContainer" class="results-container hidden">
+            <div class="results-header">
+                <h2>Prediction Results</h2>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card magnitude">
+                    <div class="result-value" id="magnitude">--</div>
+                    <div class="result-label">Predicted Magnitude</div>
+                </div>
+
+                <div class="result-card strength" id="strengthCard">
+                    <div class="result-value" id="strength">--</div>
+                    <div class="result-label">Strength Category</div>
+                </div>
+
+                <div class="result-card probability">
+                    <div class="result-value" id="probability">--</div>
+                    <div class="result-label">Strong Probability</div>
+                </div>
+            </div>
+
+            <div class="gauge-container">
+                <canvas id="gaugeChart"></canvas>
+            </div>
+
+            <div class="summary-card">
+                <h3>Earthquake Summary</h3>
+                <pre id="summary"></pre>
+            </div>
+        </div>
+
+        <div id="errorContainer" class="error-container hidden">
+            <p id="errorMessage"></p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
